@@ -39,6 +39,7 @@ html{ scroll-behavior: smooth; }
 body{
   margin: 0;
   min-height: 100vh;
+  overflow-x: clip;
   color: var(--text-primary);
   font-family: var(--font);
   line-height: 1.65;
@@ -64,7 +65,8 @@ body::after{
 }
 
 img{ max-width: 100%; display: block; }
-button{ font-family: inherit; cursor: pointer; }
+button{ font-family: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+a, input, textarea{ -webkit-tap-highlight-color: transparent; }
 
 ::selection{ background: rgba(227,178,60,0.28); color: #FFF; }
 
@@ -159,16 +161,15 @@ button{ font-family: inherit; cursor: pointer; }
   to{ opacity: 1; transform: translateY(0); }
 }
 
-/* ---------- الرأس ---------- */
+/* ---------- الرأس (يختفي عند النزول) ---------- */
 .site-header{
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 50;
   background: rgba(14, 10, 19, 0.72);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   border-bottom: 1px solid rgba(227,178,60,0.12);
-  transition: box-shadow 0.3s ease, background 0.3s ease;
+  transition: background 0.3s ease;
 }
 .site-header::after{
   content: "";
@@ -176,14 +177,7 @@ button{ font-family: inherit; cursor: pointer; }
   left: 0; right: 0; bottom: -1px;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(227,178,60,0.55) 30%, rgba(227,178,60,0.55) 70%, transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
 }
-.site-header.scrolled{
-  background: rgba(12, 8, 17, 0.88);
-  box-shadow: 0 12px 40px -18px rgba(0,0,0,0.8);
-}
-.site-header.scrolled::after{ opacity: 1; }
 
 .header-inner{
   max-width: 1340px;
@@ -194,9 +188,7 @@ button{ font-family: inherit; cursor: pointer; }
   justify-content: space-between;
   gap: 24px;
   flex-wrap: wrap;
-  transition: padding 0.3s ease;
 }
-.site-header.scrolled .header-inner{ padding-top: 9px; padding-bottom: 9px; }
 
 .brand{
   display: flex;
@@ -312,6 +304,7 @@ button{ font-family: inherit; cursor: pointer; }
 .hero{
   position: relative;
   min-height: 76vh;
+  min-height: 76svh;
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -435,8 +428,8 @@ button{ font-family: inherit; cursor: pointer; }
 
 .poster-grid{
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(auto-fill, minmax(clamp(128px, 15vw, 175px), 1fr));
+  gap: clamp(12px, 1.7vw, 24px);
 }
 .poster-card{
   position: relative;
@@ -526,6 +519,12 @@ button{ font-family: inherit; cursor: pointer; }
 }
 .poster-card:hover .poster-card-icon,
 .poster-card:focus-visible .poster-card-icon{ opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+/* على شاشات اللمس تظهر الأيقونة دائمًا دون انتظار التمرير */
+@media (hover: none), (pointer: coarse){
+  .poster-card-icon{ opacity: 0.92; transform: translate(-50%, -50%) scale(1); }
+  .poster-card:hover{ transform: none; }
+}
 .poster-card-btn{
   all: unset;
   position: absolute;
@@ -561,6 +560,7 @@ button{ font-family: inherit; cursor: pointer; }
 .series-banner{
   position: relative;
   height: 36vh;
+  height: 36svh;
   min-height: 240px;
   overflow: hidden;
 }
@@ -1205,23 +1205,23 @@ button{ font-family: inherit; cursor: pointer; }
   input, textarea{ font-size: 16px !important; }
 
   .player-frame video,
-  .player-frame iframe{ max-height: 46vh; }
+  .player-frame iframe{ max-height: 46svh; }
   .fullscreen-btn{ margin-inline-start: auto; margin-top: 12px; }
 }
 
 @media (max-width: 640px){
   .header-inner{ padding: 12px 16px; gap: 14px; }
-  .site-header.scrolled .header-inner{ padding-top: 8px; padding-bottom: 8px; }
   .brand-name{ font-size: 18px; }
   .brand-mark{ width: 32px; height: 32px; font-size: 16px; }
 
   .search-wrap{ flex: 1 1 100%; max-width: none; order: 3; }
   .header-inner{ justify-content: space-between; }
 
-  .hero{ min-height: 56vh; }
+  .hero{ min-height: 52svh; }
   .hero-content{ padding: 0 18px 38px; }
   .hero-title{ font-size: clamp(28px, 9vw, 40px); }
   .hero-actions .btn{ flex: 1 1 auto; text-align: center; min-width: 0; }
+  .hero-eyebrow{ font-size: 11.5px; padding: 5px 11px; }
 
   .catalog{ padding: 40px 18px 12px; }
   .poster-grid{ grid-template-columns: repeat(auto-fill, minmax(124px, 1fr)); gap: 14px; }
@@ -1230,7 +1230,7 @@ button{ font-family: inherit; cursor: pointer; }
   .poster-card-genre{ font-size: 11px; }
 
   .back-btn{ padding: 14px 18px; }
-  .series-banner{ height: 26vh; }
+  .series-banner{ height: 24svh; }
   .series-body{ padding: 0 18px; }
   .episodes-section{ padding: 0 18px 48px; }
   .episode-item{ padding: 13px 15px; gap: 13px; }

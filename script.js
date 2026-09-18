@@ -759,14 +759,11 @@ const revealObserver = new IntersectionObserver((entries) => {
   });
 }, { threshold: 0.08, rootMargin: "0px 0px -36px 0px" });
 
-/* انكماش الرأس عند التمرير + زر العودة للأعلى */
-const siteHeader = el("siteHeader");
+/* زر العودة للأعلى */
 const scrollTopBtn = el("scrollTopBtn");
 
 function onPageScroll() {
-  const y = window.scrollY;
-  siteHeader.classList.toggle("scrolled", y > 24);
-  scrollTopBtn.classList.toggle("visible", y > 420);
+  scrollTopBtn.classList.toggle("visible", window.scrollY > 420);
 }
 
 window.addEventListener("scroll", onPageScroll, { passive: true });

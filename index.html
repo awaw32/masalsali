@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>مسلسلي | مسلسلاتك في مكان واحد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- شريط علوي -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <button class="brand" id="brandHome" aria-label="الرئيسية">
+      <span class="brand-mark">م</span>
+      <span class="brand-name">مسلسلي</span>
+    </button>
+
+    <div class="search-wrap">
+      <svg class="search-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/>
+        <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+      <input type="text" id="searchInput" class="search-input" placeholder="ابحث عن مسلسل..." autocomplete="off">
+      <button type="button" class="search-clear" id="searchClearBtn" aria-label="مسح البحث">✕</button>
+    </div>
+
+    <button class="admin-btn" id="adminOpenBtn" aria-label="لوحة التحكم">
+      <svg width="19" height="19" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M12 15a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M19.4 13.5a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V19.5a2 2 0 11-4 0v-.09a1.65 1.65 0 00-1.08-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H4.5a2 2 0 110-4h.09A1.65 1.65 0 006.1 8.6a1.65 1.65 0 00-.33-1.82l-.06-.06A2 2 0 118.54 3.9l.06.06a1.65 1.65 0 001.82.33H10.5a1.65 1.65 0 001-1.51V2.5a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V8.6a1.65 1.65 0 001.51 1h.09a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+      <span class="admin-btn-label">لوحة التحكم</span>
+    </button>
+  </div>
+  <div class="film-strip" aria-hidden="true"></div>
+</header>
+
+<main id="mainContent">
+
+  <!-- الصفحة الرئيسية -->
+  <section id="homeView" class="view">
+
+    <!-- قسم العرض الرئيسي -->
+    <section class="hero" id="heroSection">
+      <div class="hero-media">
+        <img id="heroImage" src="" alt="">
+        <div class="hero-fade"></div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-eyebrow" id="heroBadge">الأكثر مشاهدة الآن</p>
+        <h1 class="hero-title" id="heroTitle"></h1>
+        <p class="hero-desc" id="heroDesc"></p>
+        <div class="hero-actions">
+          <button class="btn btn-gold" id="heroWatchBtn">شاهد الآن</button>
+          <button class="btn btn-ghost" id="heroInfoBtn">تفاصيل المسلسل</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- شبكة المسلسلات -->
+    <section class="catalog">
+      <div class="section-head">
+        <h2>المكتبة</h2>
+        <p class="section-sub" id="resultsCount"></p>
+      </div>
+      <div class="poster-grid" id="posterGrid"></div>
+      <p class="empty-state" id="emptyState" hidden>لا توجد نتائج مطابقة لبحثك. جرّب اسمًا آخر.</p>
+    </section>
+
+  </section>
+
+  <!-- صفحة تفاصيل المسلسل -->
+  <section id="seriesView" class="view" hidden>
+    <button class="back-btn" id="backToHome">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 5L8 12L15 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      العودة للرئيسية
+    </button>
+
+    <div class="series-banner">
+      <img id="seriesBackdrop" src="" alt="">
+      <div class="series-banner-fade"></div>
+    </div>
+
+    <div class="series-body">
+      <div class="series-poster-wrap">
+        <img id="seriesPoster" src="" alt="" class="series-poster">
+      </div>
+      <div class="series-info">
+        <p class="series-genre" id="seriesGenre"></p>
+        <h1 id="seriesTitle"></h1>
+        <p class="series-meta" id="seriesMeta"></p>
+        <p class="series-desc" id="seriesDesc"></p>
+        <button class="btn btn-gold" id="playFirstBtn">تشغيل الحلقة الأولى</button>
+      </div>
+    </div>
+
+    <div class="episodes-section">
+      <div class="section-head">
+        <h2>الحلقات</h2>
+        <p class="section-sub" id="episodeCount"></p>
+      </div>
+      <ul class="episode-list" id="episodeList"></ul>
+    </div>
+  </section>
+
+  <!-- صفحة المشغل -->
+  <section id="playerView" class="view" hidden>
+    <button class="back-btn" id="backToSeries">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15 5L8 12L15 19" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      العودة لصفحة المسلسل
+    </button>
+
+    <div class="player-frame-wrap">
+      <div class="player-frame" id="playerFrame">
+        <!-- يتم إدراج عنصر الفيديو أو iframe هنا عبر script.js -->
+      </div>
+      <button class="fullscreen-btn" id="fullscreenBtn" type="button">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 9V5a1 1 0 011-1h4M20 9V5a1 1 0 00-1-1h-4M4 15v4a1 1 0 001 1h4M20 15v4a1 1 0 01-1 1h-4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        تكبير الشاشة
+      </button>
+    </div>
+
+    <div class="player-info">
+      <p class="player-eyebrow" id="playerSeriesName"></p>
+      <h1 id="playerEpisodeTitle"></h1>
+      <p class="player-desc" id="playerEpisodeDesc"></p>
+    </div>
+
+    <div class="episodes-section">
+      <div class="section-head">
+        <h2>حلقات أخرى</h2>
+      </div>
+      <ul class="episode-list" id="playerEpisodeList"></ul>
+    </div>
+  </section>
+
+  <!-- لوحة التحكم (الأدمن) -->
+  <section id="adminView" class="view" hidden>
+    <div class="admin-topbar">
+      <div class="admin-topbar-inner">
+        <h1>لوحة التحكم</h1>
+        <div class="admin-topbar-actions">
+          <button class="btn btn-ghost btn-sm" id="adminExitBtn">خروج للموقع</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="admin-layout">
+      <!-- قائمة المسلسلات -->
+      <aside class="admin-sidebar">
+        <button class="btn btn-gold btn-block" id="adminAddSeriesBtn">+ إضافة مسلسل جديد</button>
+        <ul class="admin-series-list" id="adminSeriesList"></ul>
+      </aside>
+
+      <!-- نموذج التحرير -->
+      <div class="admin-form-panel">
+        <p class="admin-empty-hint" id="adminEmptyHint">اختر مسلسلاً من القائمة لتعديله، أو أضف مسلسلاً جديدًا.</p>
+
+        <form id="adminSeriesForm" class="admin-form" hidden>
+          <div class="admin-field-row">
+            <label class="admin-field">
+              <span>اسم المسلسل</span>
+              <input type="text" id="fTitle" required placeholder="مثال: ظلال المدينة">
+            </label>
+            <label class="admin-field">
+              <span>التصنيف</span>
+              <input type="text" id="fGenre" placeholder="مثال: دراما اجتماعية">
+            </label>
+          </div>
+
+          <div class="admin-field-row">
+            <label class="admin-field">
+              <span>سنة الإنتاج</span>
+              <input type="text" id="fYear" placeholder="مثال: 2024">
+            </label>
+            <label class="admin-field">
+              <span>الموسم</span>
+              <input type="text" id="fSeasons" placeholder="مثال: الموسم 1">
+            </label>
+          </div>
+
+          <label class="admin-field">
+            <span>وصف المسلسل</span>
+            <textarea id="fDesc" rows="3" placeholder="اكتب وصفًا مختصرًا وجذابًا للمسلسل..."></textarea>
+          </label>
+
+          <div class="admin-field-row">
+            <div class="admin-field">
+              <span>صورة البوستر (عمودية)</span>
+              <div class="admin-image-picker">
+                <img id="fPosterPreview" class="admin-image-preview" alt="">
+                <div class="admin-image-inputs">
+                  <input type="text" id="fPosterUrl" placeholder="ألصق رابط الصورة هنا">
+                  <label class="btn btn-ghost btn-sm admin-upload-label">
+                    رفع صورة من جهازك
+                    <input type="file" id="fPosterFile" accept="image/*" hidden>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="admin-field">
+              <span>صورة الخلفية (عريضة)</span>
+              <div class="admin-image-picker">
+                <img id="fBackdropPreview" class="admin-image-preview admin-image-preview-wide" alt="">
+                <div class="admin-image-inputs">
+                  <input type="text" id="fBackdropUrl" placeholder="ألصق رابط الصورة هنا">
+                  <label class="btn btn-ghost btn-sm admin-upload-label">
+                    رفع صورة من جهازك
+                    <input type="file" id="fBackdropFile" accept="image/*" hidden>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="admin-episodes-editor">
+            <div class="section-head">
+              <h2>الحلقات</h2>
+              <button type="button" class="btn btn-ghost btn-sm" id="fAddEpisodeBtn">+ إضافة حلقة</button>
+            </div>
+            <div id="fEpisodesList" class="admin-episode-edit-list"></div>
+          </div>
+
+          <p class="admin-error" id="adminFormError" hidden></p>
+
+          <div class="admin-form-actions">
+            <button type="submit" class="btn btn-gold">حفظ المسلسل</button>
+            <button type="button" class="btn btn-ghost" id="adminDeleteSeriesBtn">حذف المسلسل</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="film-strip" aria-hidden="true"></div>
+  <p>مسلسلي — قالب عرض مسلسلات. استبدل البيانات في script.js بمحتواك الخاص.</p>
+  <div class="footer-brand">
+    <span class="brand-mark">م</span>
+    <span>مسلسلي — بوابتك لعالم المسلسلات</span>
+  </div>
+</footer>
+
+<!-- زر العودة للأعلى -->
+<button class="scroll-top" id="scrollTopBtn" type="button" aria-label="العودة للأعلى">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+</button>
+
+<!-- نافذة الدخول لكلمة السر -->
+<div class="modal-overlay" id="passwordModal" hidden>
+  <div class="modal-box">
+    <button type="button" class="modal-close-btn" id="passwordModalClose" aria-label="إغلاق">✕</button>
+    <h2>دخول لوحة التحكم</h2>
+    <p class="modal-sub">أدخل كلمة السر للمتابعة.</p>
+    <input type="password" id="passwordInput" class="admin-input" maxlength="6" placeholder="كلمة السر" autocomplete="off">
+    <p class="admin-error" id="passwordModalError" hidden></p>
+    <div class="modal-actions">
+      <button class="btn btn-gold" id="passwordModalSubmit">دخول</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

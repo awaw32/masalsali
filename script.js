@@ -14,6 +14,19 @@
 
 const DEFAULT_SERIES_DATA = [
   {
+    id: "esref-ruya",
+    title: "حلم أشرف",
+    genre: "جريمة ودراما",
+    year: "2024",
+    seasons: "الموسم 2",
+    poster: "https://picsum.photos/seed/masalsali-esref/500/750",
+    backdrop: "https://picsum.photos/seed/masalsali-esref-wide/1600/900",
+    description: "أشرف تيك، يتيم فقد حب حياته رؤيا التي كانت سبب جريمته الأولى، يتقاطع طريقه مع المغنية نيسان التي تُزرع بجانبه بمكيدة لمحاولة القبض عليه، قبل أن يكتشف أنها هي حبيبته رؤيا منذ الطفولة. فهل ستكشف مصيرها للشرطة، أم ستحافظ على حبها؟",
+    episodes: [
+      { title: "الحلقة 47", desc: "الحلقة السابعة والأربعون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e47" },
+    ]
+  },
+  {
     id: "shadows-of-the-city",
     title: "ظلال المدينة",
     genre: "دراما اجتماعية",

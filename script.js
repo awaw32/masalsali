@@ -17,13 +17,59 @@ const DEFAULT_SERIES_DATA = [
     id: "esref-ruya",
     title: "حلم أشرف",
     genre: "جريمة ودراما",
-    year: "2024",
+    year: "2025-2026",
     seasons: "الموسم 2",
     poster: "https://www.qrmzi.tv/wp-content/uploads/2025/11/Esref-Ruya-cover.jpg",
     backdrop: "https://www.qrmzi.tv/wp-content/uploads/2025/11/Esref-Ruya-cover.jpg",
     description: "أشرف تيك، يتيم فقد حب حياته رؤيا التي كانت سبب جريمته الأولى، يتقاطع طريقه مع المغنية نيسان التي تُزرع بجانبه بمكيدة لمحاولة القبض عليه، قبل أن يكتشف أنها هي حبيبته رؤيا منذ الطفولة. فهل ستكشف مصيرها للشرطة، أم ستحافظ على حبها؟",
     episodes: [
-      { title: "الحلقة 47", desc: "الحلقة السابعة والأربعون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e47" },
+      { title: "الحلقة 1", desc: "أشرف تيك، الشاب المتهور الذي فقد حب حياته رؤيا، يبدأ رحلته في عالم الجريمة والمافيا.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e01" },
+      { title: "الحلقة 2", desc: "الحلقة الثانية من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e02" },
+      { title: "الحلقة 3", desc: "الحلقة الثالثة من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e03" },
+      { title: "الحلقة 4", desc: "الحلقة الرابعة من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e04" },
+      { title: "الحلقة 5", desc: "الحلقة الخامسة من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e05" },
+      { title: "الحلقة 6", desc: "الحلقة السادسة من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e06" },
+      { title: "الحلقة 7", desc: "الحلقة السابعة من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e07" },
+      { title: "الحلقة 8", desc: "الحلقة الثامنة من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e08" },
+      { title: "الحلقة 9", desc: "الحلقة التاسعة من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e09" },
+      { title: "الحلقة 10", desc: "الحلقة العاشرة من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e10" },
+      { title: "الحلقة 11", desc: "الحلقة الحادية عشر من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e11" },
+      { title: "الحلقة 12", desc: "الحلقة الثانية عشر من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e12" },
+      { title: "الحلقة 13", desc: "الحلقة الثالثة عشر من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e13" },
+      { title: "الحلقة 14", desc: "الحلقة الرابعة عشر من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e14" },
+      { title: "الحلقة 15", desc: "الحلقة الخامسة عشر من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e15" },
+      { title: "الحلقة 16", desc: "الحلقة السادسة عشر من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e16" },
+      { title: "الحلقة 17", desc: "الحلقة السابعة عشر من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e17" },
+      { title: "الحلقة 18", desc: "الحلقة الثامنة عشر من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e18" },
+      { title: "الحلقة 19", desc: "الحلقة التاسعة عشر من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e19" },
+      { title: "الحلقة 20", desc: "الحلقة العشرون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e20" },
+      { title: "الحلقة 21", desc: "الحلقة الحادية والعشرون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e21" },
+      { title: "الحلقة 22", desc: "الحلقة الثانية والعشرون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e22" },
+      { title: "الحلقة 23", desc: "الحلقة الثالثة والعشرون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e23" },
+      { title: "الحلقة 24", desc: "الحلقة الرابعة والعشرون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e24" },
+      { title: "الحلقة 25", desc: "الحلقة الخامسة والعشرون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e25" },
+      { title: "الحلقة 26", desc: "الحلقة السادسة والعشرون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e26" },
+      { title: "الحلقة 27", desc: "الحلقة السابعة والعشرون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e27" },
+      { title: "الحلقة 28", desc: "الحلقة الثامنة والعشرون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e28" },
+      { title: "الحلقة 29", desc: "الحلقة التاسعة والعشرون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e29" },
+      { title: "الحلقة 30", desc: "الحلقة الثلاثون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e30" },
+      { title: "الحلقة 31", desc: "الحلقة الحادية والثلاثون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e31" },
+      { title: "الحلقة 32", desc: "الحلقة الثانية والثلاثون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e32" },
+      { title: "الحلقة 33", desc: "الحلقة الثالثة والثلاثون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e33" },
+      { title: "الحلقة 34", desc: "الحلقة الرابعة والثلاثون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e34" },
+      { title: "الحلقة 35", desc: "الحلقة الخامسة والثلاثون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e35" },
+      { title: "الحلقة 36", desc: "الحلقة السادسة والثلاثون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e36" },
+      { title: "الحلقة 37", desc: "الحلقة السابعة والثلاثون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e37" },
+      { title: "الحلقة 38", desc: "الحلقة الثامنة والثلاثون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e38" },
+      { title: "الحلقة 39", desc: "الحلقة التاسعة والثلاثون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e39" },
+      { title: "الحلقة 40", desc: "الحلقة الأربعون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e40" },
+      { title: "الحلقة 41", desc: "الحلقة الحادية والأربعون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e41" },
+      { title: "الحلقة 42", desc: "الحلقة الثانية والأربعون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e42" },
+      { title: "الحلقة 43", desc: "الحلقة الثالثة والأربعون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e43" },
+      { title: "الحلقة 44", desc: "الحلقة الرابعة والأربعون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e44" },
+      { title: "الحلقة 45", desc: "الحلقة الخامسة والأربعون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e45" },
+      { title: "الحلقة 46", desc: "الحلقة السادسة والأربعون من مسلسل الجريمة والمافيا التركي حلم أشرف — مترجمة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e46" },
+      { title: "الحلقة 47 — الأخيرة", desc: "الحلقة الأخيرة من مسلسل الجريمة والمافيا التركي حلم أشرف — مواجهة أشرف الحاسمة مع خصومه.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e47" },
     ]
   },
   {
@@ -150,16 +196,32 @@ function migrateLegacyData() {
 migrateLegacyData();
 
 function loadSeriesData() {
+  const defaults = JSON.parse(JSON.stringify(DEFAULT_SERIES_DATA));
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw);
-      if (Array.isArray(parsed) && parsed.length) return parsed;
+      if (Array.isArray(parsed) && parsed.length) {
+        // دمج: الافتراضيات تُحدِّث الحلقات لأي مسلسل يحمل نفس الـ id،
+        // والمسلسلات المضافة يدويًا بالأدمن تبقى كما هي.
+        const storedById = new Map(parsed.map((s) => [s.id, s]));
+        const merged = [];
+        for (const d of defaults) {
+          const match = storedById.get(d.id);
+          if (match && Array.isArray(match.episodes) && match.episodes.length > d.episodes.length) {
+            merged.push(match); // الأدمن أضاف حلقات يدويًا أكبر — احترمها
+          } else {
+            merged.push(d); // حدِّث ببيانات الافتراضيات (حلقات أو تفاصيل جديدة)
+          }
+        }
+        for (const s of parsed) if (!merged.some((m) => m.id === s.id)) merged.push(s);
+        return merged;
+      }
     }
   } catch (e) {
     console.warn("تعذّرت قراءة البيانات المحفوظة، سيتم استخدام البيانات الافتراضية.", e);
   }
-  return JSON.parse(JSON.stringify(DEFAULT_SERIES_DATA));
+  return defaults;
 }
 
 function saveSeriesData() {

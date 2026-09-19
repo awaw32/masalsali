@@ -1,0 +1,10 @@
+{
+  "name": "masalsali",
+  "version": "1.0.0",
+  "private": true,
+  "description": "موقع مسلسلي — عرض المسلسلات",
+  "scripts": {
+    "check": "node tools/check.mjs",
+    "deploy": "powershell -ExecutionPolicy Bypass -File deploy.ps1"
+  }
+}

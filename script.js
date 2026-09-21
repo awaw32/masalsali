@@ -320,6 +320,9 @@ const STORAGE_KEY = "masalsali_series_data";
 const SESSION_KEY = "masalsali_admin_session";
 const LEGACY_STORAGE_KEY = "lamaa_series_data";
 const LEGACY_SESSION_KEY = "lamaa_admin_session";
+const WATCH_KEY = "masalsali_watch_progress";
+const FAV_KEY = "masalsali_favorites";
+const ADMIN_DATA_URL = "admin-data.json";
 
 /* نقل البيانات المحفوظة تحت الاسم القديم (لمعة) إلى الاسم الجديد حتى لا تُفقد */
 function migrateLegacyData() {
@@ -345,8 +348,8 @@ function migrateLegacyData() {
 
 migrateLegacyData();
 
-function loadSeriesData() {
-  const defaults = JSON.parse(JSON.stringify(DEFAULT_SERIES_DATA));
+function loadSeriesData(base) {
+  const defaults = base || JSON.parse(JSON.stringify(DEFAULT_SERIES_DATA));
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
@@ -389,7 +392,126 @@ function saveSeriesData() {
   }
 }
 
-let SERIES_DATA = loadSeriesData();
+/* ----------------------------------------------------------------------
+   1ج) متابعة المشاهدة + المفضلة — تُحفظ على جهاز الزائر نفسه
+------------------------------------------------------------------------- */
+
+function getWatchProgress() {
+  try {
+    const raw = localStorage.getItem(WATCH_KEY);
+    const parsed = raw ? JSON.parse(raw) : {};
+    return parsed && typeof parsed === "object" ? parsed : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function watchProgressFor(seriesId) {
+  const entry = getWatchProgress()[seriesId];
+  return entry && Number.isInteger(entry.index) && entry.index >= 0 ? entry.index : -1;
+}
+
+function recordWatchProgress(seriesId, episodeIndex) {
+  try {
+    const progress = getWatchProgress();
+    progress[seriesId] = { index: episodeIndex, at: Date.now() };
+    localStorage.setItem(WATCH_KEY, JSON.stringify(progress));
+    renderContinueSection();
+  } catch (e) {
+    /* تجاهل أخطاء التخزين */
+  }
+}
+
+function getFavorites() {
+  try {
+    const raw = localStorage.getItem(FAV_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+function isFavorite(seriesId) {
+  return getFavorites().includes(seriesId);
+}
+
+function toggleFavorite(seriesId) {
+  const list = getFavorites();
+  const idx = list.indexOf(seriesId);
+  if (idx >= 0) list.splice(idx, 1);
+  else list.push(seriesId);
+  try { localStorage.setItem(FAV_KEY, JSON.stringify(list)); } catch (e) { /* تجاهل */ }
+  syncFavButtons();
+  renderCatalog();
+}
+
+function syncFavButtons() {
+  document.querySelectorAll(".fav-btn").forEach((btn) => {
+    const id = btn.getAttribute("data-series");
+    const fav = isFavorite(id);
+    btn.classList.toggle("active", fav);
+    btn.setAttribute("aria-label", fav ? "إزالة من مفضلتي" : "أضف إلى مفضلتي");
+  });
+  const toggle = document.getElementById("favToggleBtn");
+  if (toggle && currentSeries) {
+    const fav = isFavorite(currentSeries.id);
+    toggle.classList.toggle("active", fav);
+    toggle.textContent = fav ? "♥ في مفضلتك" : "♥ أضف إلى مفضلتي";
+  }
+}
+
+function wireFavButton(btn, seriesId) {
+  btn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleFavorite(seriesId);
+  });
+}
+
+let SERIES_DATA = [];
+
+/* ----------------------------------------------------------------------
+   1د) مزامنة تعديلات لوحة التحكم مع كل الزوار عبر ملف admin-data.json
+   الملف يُرفع مع الموقع؛ وأي تعديل من اللوحة يُصدَّر منه ويُنشر بالرفع.
+------------------------------------------------------------------------- */
+
+async function fetchRemoteOverrides() {
+  try {
+    const res = await fetch(ADMIN_DATA_URL, { cache: "no-store" });
+    if (!res.ok) return null;
+    const data = await res.json();
+    return Array.isArray(data) ? data : null;
+  } catch (e) {
+    console.warn("لم يُعثر على ملف admin-data.json (طبيعي إن لم تنشر تعديلات بعد).", e);
+    return null;
+  }
+}
+
+function mergeRemoteOverrides(base, overrides) {
+  const byId = new Map(overrides.map((s) => [s.id, s]));
+  const out = base.map((d) => byId.get(d.id) || d);
+  for (const s of overrides) {
+    if (!out.some((m) => m.id === s.id)) out.push(s);
+  }
+  return out;
+}
+
+async function boot() {
+  let base = JSON.parse(JSON.stringify(DEFAULT_SERIES_DATA));
+  try {
+    const remote = await fetchRemoteOverrides();
+    if (Array.isArray(remote) && remote.length) base = mergeRemoteOverrides(base, remote);
+  } catch (e) {
+    console.warn("تعذّر دمج ملف التعديلات.", e);
+  }
+  SERIES_DATA = loadSeriesData(base);
+  renderHero();
+  renderCatalog();
+  renderContinueSection();
+  syncFavButtons();
+  setupSearch();
+  setupFavorites();
+}
 
 /* ----------------------------------------------------------------------
    2) عناصر DOM
@@ -497,6 +619,12 @@ function renderPlayer(container, videoUrl) {
     video.controls = true;
     video.autoplay = true;
     video.playsInline = true;
+    video.addEventListener("ended", () => {
+      const series = SERIES_DATA.find((s) => s.id === currentPlayingSeriesId);
+      if (series && currentEpisodeIndex < series.episodes.length - 1) {
+        playEpisode(series.id, currentEpisodeIndex + 1);
+      }
+    });
     container.appendChild(video);
     if (/\.m3u8(\?.*)?$/i.test(url)) {
       enableHls(video, url);
@@ -547,6 +675,9 @@ function goToSeries(seriesId) {
   showView("series");
 }
 
+let currentPlayingSeriesId = null;
+let currentEpisodeIndex = -1;
+
 function playEpisode(seriesId, episodeIndex) {
   const series = SERIES_DATA.find((s) => s.id === seriesId);
   if (!series) return;
@@ -554,28 +685,35 @@ function playEpisode(seriesId, episodeIndex) {
   if (!episode) return;
 
   currentSeries = series;
+  currentPlayingSeriesId = seriesId;
+  currentEpisodeIndex = episodeIndex;
   el("playerSeriesName").textContent = series.title;
   el("playerEpisodeTitle").textContent = episode.title;
   el("playerEpisodeDesc").textContent = episode.desc || "";
   renderPlayer(el("playerFrame"), episode.videoUrl);
   renderEpisodeList(el("playerEpisodeList"), series, episodeIndex);
+  updatePlayerNav();
   showView("player");
+  recordWatchProgress(seriesId, episodeIndex);
+}
+
+function updatePlayerNav() {
+  const series = SERIES_DATA.find((s) => s.id === currentPlayingSeriesId);
+  const valid = series && Number.isInteger(currentEpisodeIndex);
+  el("prevEpisodeBtn").hidden = !(valid && currentEpisodeIndex > 0);
+  el("nextEpisodeBtn").hidden = !(valid && currentEpisodeIndex < series.episodes.length - 1);
 }
 
 /* ----------------------------------------------------------------------
    5) عرض شبكة المسلسلات (الصفحة الرئيسية)
 ------------------------------------------------------------------------- */
 
-function renderPosterGrid(list) {
-  const grid = el("posterGrid");
-  grid.innerHTML = "";
-
-  list.forEach((series, index) => {
-    const card = document.createElement("div");
-    card.className = "poster-card reveal";
-    card.style.setProperty("--reveal-delay", `${Math.min(index * 45, 360)}ms`);
-    const title = escapeHtml(series.title);
-    card.innerHTML = `
+function createPosterCard(series, index, onOpen) {
+  const card = document.createElement("div");
+  card.className = "poster-card reveal";
+  card.style.setProperty("--reveal-delay", `${Math.min(index * 45, 360)}ms`);
+  const title = escapeHtml(series.title);
+  card.innerHTML = `
       <img src="${escapeHtml(series.poster)}" alt="${title}" loading="lazy">
       <div class="poster-card-fade"></div>
       <span class="poster-card-icon" aria-hidden="true">
@@ -585,26 +723,89 @@ function renderPosterGrid(list) {
         <p class="poster-card-title">${title}</p>
         <p class="poster-card-genre">${escapeHtml(series.genre)} · ${escapeHtml(series.year)}</p>
       </div>
-      <button class="poster-card-btn" aria-label="افتح ${title}"></button>
+      <button type="button" class="poster-card-btn" aria-label="افتح ${title}"></button>
+      <button type="button" class="fav-btn" data-series="${escapeHtml(series.id)}" aria-label="أضف إلى مفضلتي">♥</button>
     `;
-    applyImageFallback(card.querySelector("img"));
-    card.querySelector(".poster-card-btn").addEventListener("click", () => goToSeries(series.id));
-    grid.appendChild(card);
-    revealObserver.observe(card);
+  applyImageFallback(card.querySelector("img"));
+  card.querySelector(".poster-card-btn").addEventListener("click", () => {
+    if (onOpen) onOpen();
+    else goToSeries(series.id);
+  });
+  wireFavButton(card.querySelector(".fav-btn"), series.id);
+  revealObserver.observe(card);
+  return card;
+}
+
+function renderPosterGrid(list) {
+  const grid = el("posterGrid");
+  grid.innerHTML = "";
+
+  list.forEach((series, index) => {
+    grid.appendChild(createPosterCard(series, index));
   });
 
   el("resultsCount").textContent = `${list.length} مسلسل`;
   el("emptyState").hidden = list.length !== 0;
+  syncFavButtons();
+}
+
+function renderContinueSection() {
+  const section = el("continueSection");
+  const grid = el("continueGrid");
+  const progress = getWatchProgress();
+
+  const entries = Object.entries(progress)
+    .filter(([, e]) => e && Number.isInteger(e.index) && e.index >= 0)
+    .sort((a, b) => (b[1].at || 0) - (a[1].at || 0));
+
+  const list = entries
+    .map(([id]) => SERIES_DATA.find((s) => s.id === id))
+    .filter((s) => s && progress[s.id].index < s.episodes.length);
+
+  if (!list.length) {
+    section.hidden = true;
+    grid.innerHTML = "";
+    return;
+  }
+
+  section.hidden = false;
+  grid.innerHTML = "";
+  list.forEach((series, index) => {
+    const epIndex = progress[series.id].index;
+    const card = createPosterCard(series, index, () => playEpisode(series.id, epIndex));
+    const badge = document.createElement("span");
+    badge.className = "progress-badge";
+    badge.textContent = `وصلت للحلقة ${epIndex + 1}`;
+    card.appendChild(badge);
+    grid.appendChild(card);
+  });
+  syncFavButtons();
 }
 
 let currentSearchQuery = "";
+let favFilterActive = false;
 
 function renderCatalog() {
+  let list = SERIES_DATA;
   const q = currentSearchQuery.trim().toLowerCase();
-  const filtered = q
-    ? SERIES_DATA.filter((s) => s.title.toLowerCase().includes(q) || s.genre.toLowerCase().includes(q))
-    : SERIES_DATA;
-  renderPosterGrid(filtered);
+  if (favFilterActive) {
+    const favs = getFavorites();
+    list = list.filter((s) => favs.includes(s.id));
+  }
+  if (q) list = list.filter((s) => s.title.toLowerCase().includes(q) || s.genre.toLowerCase().includes(q));
+  renderPosterGrid(list);
+}
+
+function setupFavorites() {
+  el("favFilterBtn").addEventListener("click", () => {
+    favFilterActive = !favFilterActive;
+    el("favFilterBtn").classList.toggle("active", favFilterActive);
+    el("favFilterBtn").textContent = favFilterActive ? "♥ مفضلتي (عرض الكل)" : "♥ مفضلتي";
+    renderCatalog();
+  });
+  el("favToggleBtn").addEventListener("click", () => {
+    if (currentSeries) toggleFavorite(currentSeries.id);
+  });
 }
 
 function setupSearch() {
@@ -678,7 +879,16 @@ function renderSeriesView(series) {
   el("seriesDesc").textContent = series.description;
   el("episodeCount").textContent = `${series.episodes.length} حلقة`;
 
-  el("playFirstBtn").onclick = () => playEpisode(series.id, 0);
+  const resumeIndex = watchProgressFor(series.id);
+  const resumeBtn = el("playFirstBtn");
+  if (resumeIndex >= 0 && resumeIndex < series.episodes.length) {
+    resumeBtn.textContent = `أكمل المشاهدة — ${series.episodes[resumeIndex].title}`;
+    resumeBtn.onclick = () => playEpisode(series.id, resumeIndex);
+  } else {
+    resumeBtn.textContent = "تشغيل الحلقة الأولى";
+    resumeBtn.onclick = () => playEpisode(series.id, 0);
+  }
+  syncFavButtons();
 
   renderEpisodeList(el("episodeList"), series);
 }
@@ -703,6 +913,19 @@ el("backToHome").addEventListener("click", goHome);
 el("backToSeries").addEventListener("click", () => {
   if (currentSeries) goToSeries(currentSeries.id);
   else goHome();
+});
+
+el("prevEpisodeBtn").addEventListener("click", () => {
+  if (currentPlayingSeriesId && currentEpisodeIndex > 0) {
+    playEpisode(currentPlayingSeriesId, currentEpisodeIndex - 1);
+  }
+});
+
+el("nextEpisodeBtn").addEventListener("click", () => {
+  const s = SERIES_DATA.find((x) => x.id === currentPlayingSeriesId);
+  if (s && currentEpisodeIndex < s.episodes.length - 1) {
+    playEpisode(currentPlayingSeriesId, currentEpisodeIndex + 1);
+  }
 });
 
 /* ----------------------------------------------------------------------
@@ -772,6 +995,39 @@ el("passwordModal").addEventListener("click", (e) => {
 });
 
 el("adminExitBtn").addEventListener("click", goHome);
+
+/* إنشاء ملف admin-data.json لإظهار تعديلات اللوحة لكل الزوار بعد رفعه مع الموقع */
+function exportAdminData() {
+  const overrides = SERIES_DATA.filter((s) => s.editedByAdmin);
+  if (!overrides.length) {
+    alert("لا توجد تعديلات محفوظة من لوحة التحكم لتصديرها. عدّل مسلسلاً أو أضف حلقة واحفظها أولًا.");
+    return;
+  }
+  const payload = overrides.map((s) => ({
+    id: s.id,
+    title: s.title,
+    genre: s.genre,
+    year: s.year,
+    seasons: s.seasons,
+    poster: s.poster,
+    backdrop: s.backdrop,
+    description: s.description,
+    editedByAdmin: true,
+    episodes: (s.episodes || []).map((e) => ({ title: e.title, desc: e.desc, videoUrl: e.videoUrl })),
+  }));
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "admin-data.json";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  el("adminSyncHint").hidden = false;
+}
+
+el("adminExportBtn").addEventListener("click", exportAdminData);
 
 /* ----------------------------------------------------------------------
    8ج) لوحة التحكم — إدارة المسلسلات والحلقات
@@ -1032,9 +1288,7 @@ searchClearBtn.addEventListener("click", () => {
 });
 
 /* ----------------------------------------------------------------------
-   9) البدء
+   9) البدء — تحميل البيانات (مع ملف تعديلات الأدمن إن وُجد) ثم العرض
 ------------------------------------------------------------------------- */
 
-renderHero();
-renderCatalog();
-setupSearch();
+boot();

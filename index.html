@@ -64,11 +64,23 @@
       </div>
     </section>
 
+    <!-- متابعة المشاهدة -->
+    <section class="catalog" id="continueSection" hidden>
+      <div class="section-head">
+        <h2>أكمل مشاهدتك</h2>
+        <p class="section-sub">تابع من حيث توقفت</p>
+      </div>
+      <div class="poster-grid" id="continueGrid"></div>
+    </section>
+
     <!-- شبكة المسلسلات -->
     <section class="catalog">
       <div class="section-head">
         <h2>المكتبة</h2>
-        <p class="section-sub" id="resultsCount"></p>
+        <div class="section-head-actions">
+          <p class="section-sub" id="resultsCount"></p>
+          <button type="button" class="btn btn-ghost btn-sm fav-filter-btn" id="favFilterBtn">♥ مفضلتي</button>
+        </div>
       </div>
       <div class="poster-grid" id="posterGrid"></div>
       <p class="empty-state" id="emptyState" hidden>لا توجد نتائج مطابقة لبحثك. جرّب اسمًا آخر.</p>
@@ -95,6 +107,9 @@
       <div class="series-info">
         <p class="series-genre" id="seriesGenre"></p>
         <h1 id="seriesTitle"></h1>
+        <div class="series-title-row">
+          <button type="button" class="btn btn-ghost btn-sm" id="favToggleBtn">♥ أضف إلى مفضلتي</button>
+        </div>
         <p class="series-meta" id="seriesMeta"></p>
         <p class="series-desc" id="seriesDesc"></p>
         <button class="btn btn-gold" id="playFirstBtn">تشغيل الحلقة الأولى</button>
@@ -131,6 +146,10 @@
       <p class="player-eyebrow" id="playerSeriesName"></p>
       <h1 id="playerEpisodeTitle"></h1>
       <p class="player-desc" id="playerEpisodeDesc"></p>
+      <div class="player-nav">
+        <button type="button" class="btn btn-ghost btn-sm" id="prevEpisodeBtn" hidden>الحلقة السابقة</button>
+        <button type="button" class="btn btn-gold btn-sm" id="nextEpisodeBtn" hidden>الحلقة التالية</button>
+      </div>
     </div>
 
     <div class="episodes-section">
@@ -147,12 +166,19 @@
       <div class="admin-topbar-inner">
         <h1>لوحة التحكم</h1>
         <div class="admin-topbar-actions">
+          <button class="btn btn-ghost btn-sm" id="adminExportBtn">نشر التعديلات للجميع</button>
           <button class="btn btn-ghost btn-sm" id="adminExitBtn">خروج للموقع</button>
         </div>
       </div>
     </div>
 
     <div class="admin-layout">
+      <!-- مزامنة تعديلات الأدمن: الملف الذي يُنزّل يُرفع مع الموقع ليظهر للجميع -->
+      <p class="admin-sync-hint" id="adminSyncHint" hidden>
+        تم تجهيز ملف <b>admin-data.json</b> — ضعه في جذر مستودع الموقع (بجانب index.html) ثم ارفع التعديلات
+        وستظهر تغييرات لوحة التحكم لكل الزوار. كل تعديل من اللوحة يبقى محفوظًا في جهازك حتى تنشره للجميع بهذه الطريقة.
+      </p>
+
       <!-- قائمة المسلسلات -->
       <aside class="admin-sidebar">
         <button class="btn btn-gold btn-block" id="adminAddSeriesBtn">+ إضافة مسلسل جديد</button>

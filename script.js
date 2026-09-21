@@ -129,21 +129,21 @@ const DEFAULT_SERIES_DATA = [
     backdrop: "https://upload.wikimedia.org/wikipedia/tr/3/38/MuhtemelAsk.jpg",
     description: "دفنة، امرأة ناجحة بنت حياتها المهنية بجهدها وتعودت على الاستقلال، تكتشف مع الوقت أنها أصبحت وحيدة رغم نجاحها. وبينما تحاول فتح قلبها للحب لأول مرة، تجد نفسها عالقة بالمشاعر والغيرة بين رجلين مختلفين تمامًا: قادر الصريح الحاضر بقوة، وطوله الذي يخلط الأوراق ويعيد رسم المشهد.",
     episodes: [
-      { title: "الحلقة 1", desc: "الحلقة 1 الأولى من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e01" },
-      { title: "الحلقة 2", desc: "الحلقة 2 الثانية من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e02" },
-      { title: "الحلقة 3", desc: "الحلقة 3 الثالثة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e03" },
-      { title: "الحلقة 4", desc: "الحلقة 4 الرابعة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e04" },
-      { title: "الحلقة 5", desc: "الحلقة 5 الخامسة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e05" },
-      { title: "الحلقة 6", desc: "الحلقة 6 السادسة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e06" },
-      { title: "الحلقة 7", desc: "الحلقة 7 السابعة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e07" },
-      { title: "الحلقة 8", desc: "الحلقة 8 الثامنة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e08" },
-      { title: "الحلقة 9", desc: "الحلقة 9 التاسعة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e09" },
-      { title: "الحلقة 10", desc: "الحلقة 10 العاشرة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e10" },
-      { title: "الحلقة 11", desc: "الحلقة 11 الحادية عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e11" },
-      { title: "الحلقة 12", desc: "الحلقة 12 الثانية عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e12" },
-      { title: "الحلقة 13", desc: "الحلقة 13 الثالثة عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e13" },
-      { title: "الحلقة 14", desc: "الحلقة 14 الرابعة عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e14" },
-      { title: "الحلقة 15", desc: "الحلقة 15 الخامسة عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e15" },
+      { title: "الحلقة 1", desc: "الحلقة 1 الأولى من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-t2dy1ufi9zd2.html", altUrls: ["https://mp4plus.cyou/embed-2dbzdi31ov6p.html","https://anafast.cyou/embed-zffky8alwi4d.html","https://vidoba.cyou/embed-ls55wzcd2af0.html","https://vidspeed.space/embed-g87sfloe2esy.html","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e01"] },
+      { title: "الحلقة 2", desc: "الحلقة 2 الثانية من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-zdveq9x0d081.html", altUrls: ["https://mp4plus.cyou/embed-nge8l3l5vswr.html","https://anafast.cyou/embed-mw325sfxs70r.html","https://vidoba.cyou/embed-cb1jui0ocihj.html","https://vidspeed.space/embed-wj2slgm7fkib.html","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e02"] },
+      { title: "الحلقة 3", desc: "الحلقة 3 الثالثة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-ez2gdgt10m06.html", altUrls: ["https://mp4plus.cyou/embed-ojf4ktok1syc.html","https://anafast.cyou/embed-kia6wgf48r17.html","https://vidoba.cyou/embed-mzkm16hmvhly.html","https://vidspeed.space/embed-agmj51qmzoc4.html","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e03"] },
+      { title: "الحلقة 4", desc: "الحلقة 4 الرابعة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-zqglsbltdjvj.html", altUrls: ["https://mp4plus.cyou/embed-cn2r05ohf6ol.html","https://anafast.cyou/embed-e6zx4tmvjfhy.html","https://vidoba.cyou/embed-utatrsomtpcu.html","https://vidspeed.space/embed-dfwspiv9om6g.html","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e04"] },
+      { title: "الحلقة 5", desc: "الحلقة 5 الخامسة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-iez4sa8n0etp.html", altUrls: ["https://mp4plus.cyou/embed-kcgi604mmzai.html","https://anafast.cyou/embed-hmbgchhpfcyc.html","https://vidspeed.space/embed-50xh7wpl2hi4.html","https://ok.ru/videoembed/15488448662219?autoplay=1","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e05"] },
+      { title: "الحلقة 6", desc: "الحلقة 6 السادسة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-8yd7z7dj0yeo.html", altUrls: ["https://mp4plus.cyou/embed-cucjna88znmd.html","https://anafast.cyou/embed-2pwhenx4mtly.html","https://vidoba.cyou/embed-om5whnnsizy8.html","https://vidspeed.space/embed-4spbdb45zge6.html","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e06"] },
+      { title: "الحلقة 7", desc: "الحلقة 7 السابعة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-tus7tgcmgu5m.html", altUrls: ["https://mp4plus.cyou/embed-bxbbqtb6387t.html","https://anafast.cyou/embed-x9x2e5abonfo.html","https://vidspeed.space/embed-b61193w3571e.html","https://ok.ru/videoembed/15657286896331?autoplay=1","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e07"] },
+      { title: "الحلقة 8", desc: "الحلقة 8 الثامنة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-x20127vfq5cp.html", altUrls: ["https://mp4plus.cyou/embed-si49px2kkvnq.html","https://anafast.cyou/embed-1wq8b5pycekq.html","https://vidoba.cyou/embed-qhv5a9is35r1.html","https://vidspeed.space/embed-uaueulffozog.html","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e08"] },
+      { title: "الحلقة 9", desc: "الحلقة 9 التاسعة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-r6ag550dses0.html", altUrls: ["https://mp4plus.cyou/embed-fzf22os04xkg.html","https://anafast.cyou/embed-gqjfiqepkiy8.html","https://vidoba.cyou/embed-481bsgqx1ylb.html","https://vidspeed.space/embed-bcmf883gvrpr.html","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e09"] },
+      { title: "الحلقة 10", desc: "الحلقة 10 العاشرة من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-8gen1mg9907t.html", altUrls: ["https://mp4plus.cyou/embed-lgzavzzzfdzn.html","https://vidoba.cyou/embed-d3mlpil20qkj.html","https://vidspeed.space/embed-nqjh8s466mos.html","https://ok.ru/videoembed/15891826346699?autoplay=1","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e10"] },
+      { title: "الحلقة 11", desc: "الحلقة 11 الحادية عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-quo41kbwlgwv.html", altUrls: ["https://mp4plus.cyou/embed-4vxpxfc4vfw4.html","https://anafast.cyou/embed-s0879olngzm0.html","https://vidoba.cyou/embed-mmexx1641498.html","https://vidspeed.space/embed-olf4sfjxeprc.html","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e11"] },
+      { title: "الحلقة 12", desc: "الحلقة 12 الثانية عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-esqmz2hb4zs8.html", altUrls: ["https://mp4plus.cyou/embed-se6c6zvyd4ao.html","https://anafast.cyou/embed-7gui06fiyro1.html","https://vidoba.cyou/embed-kaq4yja7ay6r.html","https://vidspeed.space/embed-o7m6tv53s2we.html","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e12"] },
+      { title: "الحلقة 13", desc: "الحلقة 13 الثالثة عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-e13zvr0smk0e.html", altUrls: ["https://mp4plus.cyou/embed-nrg8pymiffo6.html","https://vidoba.cyou/embed-gc5ncc30w7sr.html","https://vidspeed.space/embed-18g5nqk8k9to.html","https://ok.ru/videoembed/16120713317067?autoplay=1","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e13"] },
+      { title: "الحلقة 14", desc: "الحلقة 14 الرابعة عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-7osb12imhrz0.html", altUrls: ["https://mp4plus.cyou/embed-vyfmgyzniqil.html","https://anafast.cyou/embed-fgqgaqgxm2q5.html","https://vidoba.cyou/embed-yr8xef93q7yx.html","https://vidspeed.space/embed-81vrb64qszne.html","https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e14"] },
+      { title: "الحلقة 15", desc: "الحلقة 15 الخامسة عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://cdnplus.space/embed-czm8efu8nqwh.html", altUrls: ["https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e15"] },
       { title: "الحلقة 16", desc: "الحلقة 16 السادسة عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e16" },
       { title: "الحلقة 17", desc: "الحلقة 17 السابعة عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e17" },
       { title: "الحلقة 18", desc: "الحلقة 18 الثامنة عشر من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e18" },
@@ -602,12 +602,16 @@ function enableHls(video, url) {
       if (!data.fatal) return;
       fatalErrors += 1;
       if (fatalErrors > 3) {
+        if (tryNextSource(true)) return;
         showPlayerMessage(video.parentNode, "تعذّر تشغيل هذا الفيديو — تحقق من رابط .m3u8.");
         return;
       }
       if (data.type === window.Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad();
       else if (data.type === window.Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError();
-      else showPlayerMessage(video.parentNode, "تعذّر تشغيل هذا الفيديو (HLS).");
+      else {
+        if (tryNextSource(true)) return;
+        showPlayerMessage(video.parentNode, "تعذّر تشغيل هذا الفيديو (HLS).");
+      }
     });
   };
 
@@ -622,14 +626,107 @@ function enableHls(video, url) {
   }
 }
 
-function renderPlayer(container, videoUrl) {
-  container.innerHTML = "";
-  if (!videoUrl) {
+function getEpisodeSources(episode) {
+  const sources = [];
+  const push = (u) => {
+    const clean = u ? String(u).trim() : "";
+    if (clean && !sources.includes(clean)) sources.push(clean);
+  };
+  push(episode.videoUrl);
+  (episode.altUrls || []).forEach(push);
+  return sources;
+}
+
+function sourceMemoryKey() {
+  if (!currentPlayingSeriesId || currentEpisodeIndex < 0) return null;
+  return `masalsali_source_${currentPlayingSeriesId}_e${currentEpisodeIndex}`;
+}
+
+function renderSourceTabs(sources) {
+  const bar = el("playerSources");
+  const box = el("playerSourcesBtns");
+  const hint = el("playerSourcesHint");
+  if (!bar || !box) return;
+  if (sources.length < 2) {
+    bar.hidden = true;
+    box.innerHTML = "";
+    return;
+  }
+  bar.hidden = false;
+  box.innerHTML = "";
+  sources.forEach((src, i) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "player-source-btn";
+    btn.dataset.index = String(i);
+    btn.textContent = `المشغّل ${i + 1}`;
+    btn.addEventListener("click", () => selectSource(src, i));
+    if (getActiveSource() === src) btn.classList.add("active");
+    box.appendChild(btn);
+  });
+  const active = box.querySelector(".active");
+  if (active) active.scrollIntoView({ block: "nearest", inline: "center", behavior: "smooth" });
+}
+
+function flashHint() {
+  const hint = el("playerSourcesHint");
+  if (!hint) return;
+  hint.classList.remove("visible");
+  requestAnimationFrame(() => hint.classList.add("visible"));
+  setTimeout(() => hint.classList.remove("visible"), 6000);
+}
+
+function getActiveSource() {
+  const key = sourceMemoryKey();
+  if (!key) return null;
+  try {
+    return localStorage.getItem(key);
+  } catch {
+    return null;
+  }
+}
+
+function setActiveSource(url) {
+  const key = sourceMemoryKey();
+  if (!key || !url) return;
+  try {
+    localStorage.setItem(key, url);
+  } catch {
+    /* تجاهل */
+  }
+}
+
+function selectSource(sourceUrl, index) {
+  setActiveSource(sourceUrl);
+  const all = getEpisodeSources(currentEpisode);
+  all.forEach((src, i) => {
+    const btn = el("playerSourcesBtns")?.querySelector(`[data-index="${i}"]`);
+    if (btn) btn.classList.toggle("active", src === sourceUrl);
+  });
+  renderActiveSource(sourceUrl);
+}
+
+function tryNextSource(auto) {
+  const all = getEpisodeSources(currentEpisode);
+  if (all.length < 2) return false;
+  const active = getActiveSource();
+  const idx = all.findIndex((u) => u === active);
+  const next = (idx + 1) % all.length;
+  setActiveSource(all[next]);
+  renderActiveSource(all[next]);
+  if (auto) flashHint();
+  return true;
+}
+
+function renderActiveSource(url) {
+  const container = el("playerFrame");
+  if (!container || !currentEpisode) return;
+  if (!url) {
     showPlayerMessage(container, "لم يتم إضافة رابط فيديو لهذه الحلقة بعد.");
     return;
   }
 
-  const { type, url } = toEmbeddableUrl(videoUrl);
+  const { type, url: embedUrl } = toEmbeddableUrl(url);
 
   if (type === "video") {
     const video = document.createElement("video");
@@ -643,28 +740,29 @@ function renderPlayer(container, videoUrl) {
       }
     });
     video.addEventListener("error", () => {
+      if (tryNextSource(true)) return;
       showPlayerMessage(container, "تعذّر تشغيل الفيديو — قد يكون الرابط معطلاً أو الصيغة غير مدعومة في هذا المتصفح.");
     });
     container.appendChild(video);
-    if (/\.m3u8(\?.*)?$/i.test(url)) {
-      enableHls(video, url);
+    if (/\.m3u8(\?.*)?$/i.test(embedUrl)) {
+      enableHls(video, embedUrl);
     } else {
-      video.src = url;
+      video.src = embedUrl;
     }
   } else {
     const loader = document.createElement("div");
     loader.className = "player-frame-load";
-    loader.innerHTML = '<span class="frame-spinner"></span><p>جارٍ تحميل المشغّل...</p>';
+    loader.innerHTML = '<span class="frame-spinner"></span><p>جارٍ تحميل المشغّل...</p><p class="player-load-note">إن استغرق مشغّل رقمًّا وقتًا طويلًا، جرّب رقمًا آخر من الأعلى.</p>';
     container.appendChild(loader);
 
+    let loaded = false;
     const iframe = document.createElement("iframe");
-    iframe.src = url;
+    iframe.src = embedUrl;
     iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture; encrypted-media");
     iframe.setAttribute("allowfullscreen", "true");
     iframe.referrerPolicy = "no-referrer-when-downgrade";
     container.appendChild(iframe);
 
-    let loaded = false;
     iframe.addEventListener("load", () => {
       loaded = true;
       if (loader.isConnected) loader.remove();
@@ -674,12 +772,32 @@ function renderPlayer(container, videoUrl) {
       loader.className = "player-frame-error";
       loader.innerHTML = `
         <span class="frame-error-icon">!</span>
-        <p>استغرق المشغّل وقتًا طويلًا — تحقق من اتصالك ثم أعد المحاولة.</p>
+        <p>استغرق المشغّل وقتًا طويلًا — إن لم يعمل جرّب مشغّلاً آخر من الأعلى.</p>
         <button type="button" class="btn btn-gold btn-sm" data-retry>إعادة المحاولة</button>`;
       const retry = loader.querySelector("[data-retry]");
-      if (retry) retry.addEventListener("click", () => renderPlayer(container, videoUrl));
+      if (retry) retry.addEventListener("click", () => {
+        if (tryNextSource(false)) return;
+        renderActiveSource(url);
+      });
     }, 15000);
   }
+}
+
+function renderPlayer(episode) {
+  currentEpisode = episode;
+  const container = el("playerFrame");
+  if (!container) return;
+  container.innerHTML = "";
+  const sources = getEpisodeSources(episode);
+  if (!sources.length) {
+    showPlayerMessage(container, "لم يتم إضافة رابط فيديو لهذه الحلقة بعد.");
+    renderSourceTabs([]);
+    return;
+  }
+
+  renderSourceTabs(sources);
+  const active = getActiveSource();
+  renderActiveSource(active && sources.includes(active) ? active : sources[0]);
 }
 
 /* ----------------------------------------------------------------------
@@ -718,6 +836,7 @@ function goToSeries(seriesId) {
 
 let currentPlayingSeriesId = null;
 let currentEpisodeIndex = -1;
+let currentEpisode = null;
 
 function playEpisode(seriesId, episodeIndex) {
   const series = SERIES_DATA.find((s) => s.id === seriesId);
@@ -731,7 +850,7 @@ function playEpisode(seriesId, episodeIndex) {
   el("playerSeriesName").textContent = series.title;
   el("playerEpisodeTitle").textContent = episode.title;
   el("playerEpisodeDesc").textContent = episode.desc || "";
-  renderPlayer(el("playerFrame"), episode.videoUrl);
+  renderPlayer(episode);
   renderEpisodeList(el("playerEpisodeList"), series, episodeIndex);
   updatePlayerNav();
   showView("player");
@@ -1187,7 +1306,7 @@ function renderAdminSeriesList() {
 }
 
 function emptyEpisode() {
-  return { title: "", desc: "", videoUrl: "" };
+  return { title: "", desc: "", videoUrl: "", altUrls: [] };
 }
 
 function renderEpisodeEditor(episodes) {
@@ -1204,6 +1323,7 @@ function renderEpisodeEditor(episodes) {
       </div>
       <div>
         <input type="text" class="ep-url" placeholder="رابط الفيديو (mp4 أو يوتيوب أو رابط تضمين)" value="${escapeHtml(ep.videoUrl || "")}">
+        <input type="text" class="ep-alt" placeholder="روابط مشغّلات بديلة — افصل بفواصل (اختياري)" value="${escapeHtml((ep.altUrls || []).join(", "))}">
       </div>
       <button type="button" class="ep-remove" title="حذف الحلقة">✕</button>
     `;
@@ -1240,6 +1360,7 @@ el("fAddEpisodeBtn").addEventListener("click", () => {
     </div>
     <div>
       <input type="text" class="ep-url" placeholder="رابط الفيديو (mp4 أو يوتيوب أو رابط تضمين)">
+      <input type="text" class="ep-alt" placeholder="روابط مشغّلات بديلة — افصل بفواصل (اختياري)">
     </div>
     <button type="button" class="ep-remove" title="حذف الحلقة">✕</button>
   `;
@@ -1317,8 +1438,11 @@ el("adminSeriesForm").addEventListener("submit", (e) => {
       title: row.querySelector(".ep-title").value.trim(),
       desc: row.querySelector(".ep-desc").value.trim(),
       videoUrl: row.querySelector(".ep-url").value.trim(),
+      altUrls: row.querySelector(".ep-alt").value.split(",")
+        .map((u) => u.trim())
+        .filter((u) => u),
     }))
-    .filter((ep) => ep.title || ep.videoUrl);
+    .filter((ep) => ep.title || ep.videoUrl || ep.altUrls.length);
 
   const seriesObj = {
     id: adminEditingId && adminEditingId !== "new" ? adminEditingId : `series-${Date.now()}`,

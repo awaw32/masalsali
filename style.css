@@ -1575,3 +1575,100 @@ html{ -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
 @media (hover: none), (pointer: coarse){
   .poster-card{ transform: none; }
 }
+
+/* ==========================================================================
+   شريط أرقام المشغّلات فوق الفيديو + ضبط كثيف لصفحة المشغّل على الجوال
+   ========================================================================== */
+.player-sources{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-bottom: 12px;
+  padding: 10px 14px;
+  background: linear-gradient(120deg, var(--surface) 0%, rgba(33,23,40,0.8) 100%);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+}
+.player-sources-label{
+  color: var(--gold);
+  font-weight: 800;
+  font-size: 13px;
+  flex: 0 0 auto;
+}
+.player-sources-btns{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex: 1 1 auto;
+}
+.player-source-btn{
+  all: unset;
+  cursor: pointer;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: rgba(33,23,40,0.7);
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 800;
+  transition: all 0.2s ease;
+}
+.player-source-btn:hover{ border-color: rgba(227,178,60,0.6); color: var(--gold-hi); }
+.player-source-btn.active{
+  background: linear-gradient(140deg, var(--gold-hi), var(--gold) 55%, var(--gold-low));
+  border-color: transparent;
+  color: #1C1106;
+  box-shadow: 0 6px 18px -8px rgba(227,178,60,0.7);
+}
+.player-sources-hint{
+  flex: 0 0 100%;
+  color: var(--text-faint);
+  font-size: 12px;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.player-sources-hint.visible{
+  opacity: 1;
+  transform: translateY(0);
+  color: var(--gold-hi);
+}
+.player-load-note{
+  color: var(--text-faint);
+  font-weight: 500;
+  font-size: 12.5px;
+}
+
+/* صفحة المشغّل: ضغط المسافات وإزالة الفراغات الوهمية على الجوال */
+@media (max-width: 900px){
+  .player-frame-wrap{ margin-top: 6px; }
+  .player-info{ margin-top: 18px; }
+  .player-desc{ max-height: 132px; overflow: hidden; }
+  .player-desc::after{ content: ""; }
+}
+@media (max-width: 640px){
+  .player-frame-wrap, .player-info{ padding-inline: 12px; }
+  .player-sources{ padding: 9px 11px; gap: 8px 10px; }
+  .player-source-btn{ padding: 8px 13px; font-size: 12.5px; }
+  .player-sources-btns{ overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+  .player-sources-btns::-webkit-scrollbar{ display: none; }
+  .player-frame video,
+  .player-frame iframe{ aspect-ratio: 16 / 9; max-height: 58dvh; }
+  .fullscreen-btn{ margin-top: 10px; }
+  .player-info h1{ font-size: 20px; margin-bottom: 8px; }
+  .player-eyebrow{ font-size: 12.5px; margin-bottom: 6px; }
+  .player-desc{ font-size: 13.5px; line-height: 1.75; max-height: none; }
+  .player-nav{ margin-top: 14px; gap: 10px; }
+  .episodes-section{ margin-top: 30px; }
+}
+@media (max-width: 359px){
+  .player-source-btn{ padding: 7px 10px; font-size: 12px; }
+}
+@media (max-height: 480px) and (orientation: landscape){
+  .player-frame video,
+  .player-frame iframe{ max-height: 72svh; }
+  .player-info{ margin-top: 10px; }
+}

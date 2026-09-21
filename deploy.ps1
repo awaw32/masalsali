@@ -1,6 +1,6 @@
-# نشر الموقع بضغطة واحدة
+﻿# نشر الموقع بضغطة واحدة
 # الاستخدام: .\deploy.ps1 "رسالة التغيير"   (بدون رسالة = رسالة افتراضية مع التاريخ)
-param([string]$Message = "تحديث موقع مسلسلي " + Get-Date -Format "yyyy-MM-dd HH:mm")
+param([string]$Message = "تحديث موقع مسلسلي " + (Get-Date -Format "yyyy-MM-dd HH:mm"))
 
 $ErrorActionPreference = "Stop"
 

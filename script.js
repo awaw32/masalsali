@@ -77,7 +77,7 @@ const DEFAULT_SERIES_DATA = [
     title: "قلب أسود",
     genre: "دراما عائلية",
     year: "2024-2025",
-    seasons: "الموسم 1 (34 حلقة)",
+    seasons: "الموسم 1 (35 حلقة)",
     poster: "https://img-s3.onedio.com/id-69a2406178af2910ed519838/rev-0/w-900/h-1323/f-jpg/s-0d484fa5ee6faa905602377a8e789a88dad4e331.jpg",
     backdrop: "https://img-s3.onedio.com/id-69a2406178af2910ed519838/rev-0/w-900/h-1323/f-jpg/s-0d484fa5ee6faa905602377a8e789a88dad4e331.jpg",
     description: "سمرو، التي تركت أطفالها عندما كانت شابة وأسّست لنفسها عائلة وحياة جديدة، تُكتشف حقيقتها بعد سنوات عندما يتّضح لملك ونوح أنهما ابناها، فيسعيان وراءها ليفاجئا بحياتها الجديدة كلها في كابادوكيا مع زوجها من أغنى رجال الأعمال. رحلة انتقام ومصارعة عائلية تتعقد بعلاقات الحب الجديدة.",
@@ -202,10 +202,15 @@ function loadSeriesData() {
         const merged = [];
         for (const d of defaults) {
           const match = storedById.get(d.id);
-          if (match && Array.isArray(match.episodes) && match.episodes.length > d.episodes.length) {
-            merged.push(match); // الأدمن أضاف حلقات يدويًا أكبر — احترمها
+          if (match && match.editedByAdmin) {
+            // عُدّل من لوحة التحكم (اسم/صورة/وصف/حذف حلقات...) — احترمه كما هو تمامًا
+            merged.push(match);
+          } else if (match && Array.isArray(match.episodes) && match.episodes.length > d.episodes.length) {
+            // نسخة قديمة غير معدلة فيها حلقات إضافية من نسخة سابقة — احترمها
+            merged.push(match);
           } else {
-            merged.push(d); // حدِّث ببيانات الافتراضيات (حلقات أو تفاصيل جديدة)
+            // نسخة قديمة غير معدلة أو لا توجد — حدِّث ببيانات الافتراضيات (حلقات أو تفاصيل جديدة)
+            merged.push(d);
           }
         }
         for (const s of parsed) if (!merged.some((m) => m.id === s.id)) merged.push(s);
@@ -356,10 +361,21 @@ function renderPlayer(container, videoUrl) {
    4) التنقل بين الصفحات
 ------------------------------------------------------------------------- */
 
+function stopActivePlayer() {
+  if (document.fullscreenElement || document.webkitFullscreenElement) {
+    const exit = document.exitFullscreen || document.webkitExitFullscreen;
+    if (exit) exit.call(document);
+  }
+  const frame = el("playerFrame");
+  if (frame) frame.innerHTML = "";
+}
+
 function showView(name) {
+  const leavingPlayer = name !== "player" && views.player && !views.player.hidden;
   Object.entries(views).forEach(([key, node]) => {
     node.hidden = key !== name;
   });
+  if (leavingPlayer) stopActivePlayer();
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
 
@@ -775,6 +791,7 @@ el("adminSeriesForm").addEventListener("submit", (e) => {
     backdrop: el("fBackdropUrl").value.trim() || el("fPosterUrl").value.trim(),
     description: el("fDesc").value.trim(),
     episodes,
+    editedByAdmin: true,
   };
 
   const existingIndex = SERIES_DATA.findIndex((s) => s.id === seriesObj.id);

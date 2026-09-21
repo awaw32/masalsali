@@ -19,8 +19,8 @@ const DEFAULT_SERIES_DATA = [
     genre: "جريمة ودراما",
     year: "2025-2026",
     seasons: "موسمان كاملان (47 حلقة)",
-    poster: "https://www.qrmzi.tv/wp-content/uploads/2025/11/Esref-Ruya-cover.jpg",
-    backdrop: "https://www.qrmzi.tv/wp-content/uploads/2025/11/Esref-Ruya-cover.jpg",
+    poster: "https://upload.wikimedia.org/wikipedia/tr/1/14/E%C5%9FrefR%C3%BCya.jpg",
+    backdrop: "https://upload.wikimedia.org/wikipedia/tr/1/14/E%C5%9FrefR%C3%BCya.jpg",
     description: "أشرف تيك، يتيم فقد حب حياته رؤيا التي كانت سبب جريمته الأولى، يتقاطع طريقه مع المغنية نيسان التي تُزرع بجانبه بمكيدة لمحاولة القبض عليه، قبل أن يكتشف أنها هي حبيبته رؤيا منذ الطفولة. فهل ستكشف مصيرها للشرطة، أم ستحافظ على حبها؟",
     episodes: [
       { title: "الحلقة 1", desc: "الحلقة 1 الأولى من مسلسل الجريمة والأكشن التركي حلم أشرف، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/esref-ruya-s01e01" },
@@ -125,8 +125,8 @@ const DEFAULT_SERIES_DATA = [
     genre: "رومانسي كوميدي",
     year: "2026",
     seasons: "الموسم 1 (20 حلقة)",
-    poster: "https://w1.qrmzi.cyou/wp-content/uploads/2026/06/Muhtemel-Ask-Poster.jpg",
-    backdrop: "https://w1.qrmzi.cyou/wp-content/uploads/2026/06/Muhtemel-Ask-Cover-470x255.jpg",
+    poster: "https://upload.wikimedia.org/wikipedia/tr/3/38/MuhtemelAsk.jpg",
+    backdrop: "https://upload.wikimedia.org/wikipedia/tr/3/38/MuhtemelAsk.jpg",
     description: "دفنة، امرأة ناجحة بنت حياتها المهنية بجهدها وتعودت على الاستقلال، تكتشف مع الوقت أنها أصبحت وحيدة رغم نجاحها. وبينما تحاول فتح قلبها للحب لأول مرة، تجد نفسها عالقة بالمشاعر والغيرة بين رجلين مختلفين تمامًا: قادر الصريح الحاضر بقوة، وطوله الذي يخلط الأوراق ويعيد رسم المشهد.",
     episodes: [
       { title: "الحلقة 1", desc: "الحلقة 1 الأولى من المسلسل الرومانسي الكوميدي حب محتمل، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/muhtemel-ask-2026-s01e01" },
@@ -157,8 +157,8 @@ const DEFAULT_SERIES_DATA = [
     genre: "دراما طبية عائلية",
     year: "2024-2025",
     seasons: "3 مواسم كاملة (64 حلقة)",
-    poster: "https://upload.wikimedia.org/wikipedia/en/thumb/5/59/Bahar_tv_series_poster.jpg/500px-Bahar_tv_series_poster.jpg",
-    backdrop: "https://upload.wikimedia.org/wikipedia/en/thumb/5/59/Bahar_tv_series_poster.jpg/500px-Bahar_tv_series_poster.jpg",
+    poster: "https://upload.wikimedia.org/wikipedia/tr/0/08/BaharDizi.jpg",
+    backdrop: "https://upload.wikimedia.org/wikipedia/tr/0/08/BaharDizi.jpg",
     description: "بهار، ربة منزل محبة لعائلتها اعتزلت مهنة الطب منذ زواجها، تكتشف بعد أزمة صحية مفاجئة أن حياتها المثالية لم تكن كما بدت، فتقرر العودة إلى ممارسة الطب واستعادة حياتها وتحقيق أحلامها من جديد. دراما طبية عائلية مقتبسة من المسلسل الكوري الشهير الطبيبة تشا، بطولة ديمت إفجار وبورا جولسوي ومحمد يلماز آك.",
     episodes: [
       { title: "الحلقة 1", desc: "الحلقة 1 من مسلسل الدراما الطبية والعائلية التركي بهار، مترجمة كاملة بجودة HD.", videoUrl: "https://w.anaplayer.online/albaplayer/bahar-s01e01" },
@@ -497,20 +497,37 @@ function mergeRemoteOverrides(base, overrides) {
 }
 
 async function boot() {
-  let base = JSON.parse(JSON.stringify(DEFAULT_SERIES_DATA));
   try {
-    const remote = await fetchRemoteOverrides();
-    if (Array.isArray(remote) && remote.length) base = mergeRemoteOverrides(base, remote);
-  } catch (e) {
-    console.warn("تعذّر دمج ملف التعديلات.", e);
+    let base = JSON.parse(JSON.stringify(DEFAULT_SERIES_DATA));
+    try {
+      const remote = await fetchRemoteOverrides();
+      if (Array.isArray(remote) && remote.length) base = mergeRemoteOverrides(base, remote);
+    } catch (e) {
+      console.warn("تعذّر دمج ملف التعديلات.", e);
+    }
+    SERIES_DATA = loadSeriesData(base);
+    renderHero();
+    buildFilterOptions();
+    renderCatalog();
+    renderContinueSection();
+    syncFavButtons();
+    setupSearch();
+    setupFavorites();
+
+    const target = new URLSearchParams(window.location.search).get("s");
+    if (target && SERIES_DATA.some((x) => x.id === target)) {
+      goToSeries(target);
+    }
+  } finally {
+    const loader = el("appLoader");
+    if (loader) loader.hidden = true;
   }
-  SERIES_DATA = loadSeriesData(base);
-  renderHero();
-  renderCatalog();
-  renderContinueSection();
-  syncFavButtons();
-  setupSearch();
-  setupFavorites();
+
+  if ("serviceWorker" in navigator) {
+    try {
+      navigator.serviceWorker.register("sw.js").catch(() => {});
+    } catch (e) { /* تجاهل */ }
+  }
 }
 
 /* ----------------------------------------------------------------------
@@ -625,6 +642,9 @@ function renderPlayer(container, videoUrl) {
         playEpisode(series.id, currentEpisodeIndex + 1);
       }
     });
+    video.addEventListener("error", () => {
+      showPlayerMessage(container, "تعذّر تشغيل الفيديو — قد يكون الرابط معطلاً أو الصيغة غير مدعومة في هذا المتصفح.");
+    });
     container.appendChild(video);
     if (/\.m3u8(\?.*)?$/i.test(url)) {
       enableHls(video, url);
@@ -632,12 +652,33 @@ function renderPlayer(container, videoUrl) {
       video.src = url;
     }
   } else {
+    const loader = document.createElement("div");
+    loader.className = "player-frame-load";
+    loader.innerHTML = '<span class="frame-spinner"></span><p>جارٍ تحميل المشغّل...</p>';
+    container.appendChild(loader);
+
     const iframe = document.createElement("iframe");
     iframe.src = url;
     iframe.setAttribute("allow", "autoplay; fullscreen; picture-in-picture; encrypted-media");
     iframe.setAttribute("allowfullscreen", "true");
     iframe.referrerPolicy = "no-referrer-when-downgrade";
     container.appendChild(iframe);
+
+    let loaded = false;
+    iframe.addEventListener("load", () => {
+      loaded = true;
+      if (loader.isConnected) loader.remove();
+    });
+    setTimeout(() => {
+      if (loaded || !loader.isConnected) return;
+      loader.className = "player-frame-error";
+      loader.innerHTML = `
+        <span class="frame-error-icon">!</span>
+        <p>استغرق المشغّل وقتًا طويلًا — تحقق من اتصالك ثم أعد المحاولة.</p>
+        <button type="button" class="btn btn-gold btn-sm" data-retry>إعادة المحاولة</button>`;
+      const retry = loader.querySelector("[data-retry]");
+      if (retry) retry.addEventListener("click", () => renderPlayer(container, videoUrl));
+    }, 15000);
   }
 }
 
@@ -714,7 +755,7 @@ function createPosterCard(series, index, onOpen) {
   card.style.setProperty("--reveal-delay", `${Math.min(index * 45, 360)}ms`);
   const title = escapeHtml(series.title);
   card.innerHTML = `
-      <img src="${escapeHtml(series.poster)}" alt="${title}" loading="lazy">
+      <img src="${escapeHtml(series.poster)}" alt="${title}" loading="lazy" decoding="async">
       <div class="poster-card-fade"></div>
       <span class="poster-card-icon" aria-hidden="true">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M8 5.5L18 12L8 18.5V5.5Z" fill="currentColor"/></svg>
@@ -785,15 +826,36 @@ function renderContinueSection() {
 let currentSearchQuery = "";
 let favFilterActive = false;
 
+function applySort(list) {
+  const mode = el("sortSelect").value;
+  const copy = list.slice();
+  if (mode === "recent") copy.sort((a, b) => (parseInt(b.year, 10) || 0) - (parseInt(a.year, 10) || 0));
+  else if (mode === "title") copy.sort((a, b) => a.title.localeCompare(b.title, "ar"));
+  else if (mode === "episodes") copy.sort((a, b) => b.episodes.length - a.episodes.length);
+  return copy;
+}
+
+function buildFilterOptions() {
+  const select = el("genreFilter");
+  const current = select.value;
+  const genres = [...new Set(SERIES_DATA.map((s) => s.genre).filter(Boolean))]
+    .sort((a, b) => a.localeCompare(b, "ar"));
+  select.innerHTML = `<option value="">كل الأنواع</option>` +
+    genres.map((g) => `<option value="${escapeHtml(g)}">${escapeHtml(g)}</option>`).join("");
+  select.value = current;
+}
+
 function renderCatalog() {
-  let list = SERIES_DATA;
-  const q = currentSearchQuery.trim().toLowerCase();
+  let list = SERIES_DATA.slice();
   if (favFilterActive) {
     const favs = getFavorites();
     list = list.filter((s) => favs.includes(s.id));
   }
+  const genre = el("genreFilter").value;
+  if (genre) list = list.filter((s) => s.genre === genre);
+  const q = currentSearchQuery.trim().toLowerCase();
   if (q) list = list.filter((s) => s.title.toLowerCase().includes(q) || s.genre.toLowerCase().includes(q));
-  renderPosterGrid(list);
+  renderPosterGrid(applySort(list));
 }
 
 function setupFavorites() {
@@ -828,6 +890,8 @@ function renderHero() {
   el("heroSection").hidden = false;
   el("heroImage").src = featured.backdrop;
   el("heroImage").alt = featured.title;
+  el("heroImage").setAttribute("fetchpriority", "high");
+  el("heroImage").setAttribute("decoding", "async");
   applyImageFallback(el("heroImage"));
   el("heroTitle").textContent = featured.title;
   el("heroDesc").textContent = featured.description;
@@ -869,9 +933,11 @@ function renderEpisodeList(container, series, activeIndex = -1) {
 function renderSeriesView(series) {
   el("seriesBackdrop").src = series.backdrop;
   el("seriesBackdrop").alt = series.title;
+  el("seriesBackdrop").setAttribute("decoding", "async");
   applyImageFallback(el("seriesBackdrop"));
   el("seriesPoster").src = series.poster;
   el("seriesPoster").alt = series.title;
+  el("seriesPoster").setAttribute("decoding", "async");
   applyImageFallback(el("seriesPoster"));
   el("seriesGenre").textContent = series.genre;
   el("seriesTitle").textContent = series.title;
@@ -928,12 +994,73 @@ el("nextEpisodeBtn").addEventListener("click", () => {
   }
 });
 
+/* فلترة وترتيب المكتبة */
+el("genreFilter").addEventListener("change", renderCatalog);
+el("sortSelect").addEventListener("change", renderCatalog);
+
+/* مشاركة */
+function copyFallback(text) {
+  try {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    ta.style.position = "fixed";
+    ta.style.opacity = "0";
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  } catch (e) { /* تجاهل */ }
+  alert("تم نسخ رابط المشاركة — ألصقه أينما شئت.");
+}
+
+function shareSeries(series) {
+  const text = `شاهد المسلسل "${series.title}" على مسلسلي`;
+  if (navigator.share) navigator.share({ title: series.title, text, url: window.location.href }).catch(() => {});
+  else copyFallback(`${text}\n${window.location.href}`);
+}
+
+function shareEpisode() {
+  if (!currentSeries) return;
+  const series = SERIES_DATA.find((s) => s.id === currentPlayingSeriesId);
+  const ep = series && Number.isInteger(currentEpisodeIndex) ? series.episodes[currentEpisodeIndex] : null;
+  const text = `أشاهد الآن ${currentSeries.title}${ep ? " — " + ep.title : ""} على مسلسلي`;
+  if (navigator.share) navigator.share({ title: currentSeries.title, text, url: window.location.href }).catch(() => {});
+  else copyFallback(`${text}\n${window.location.href}`);
+}
+
+el("seriesShareBtn").addEventListener("click", () => { if (currentSeries) shareSeries(currentSeries); });
+el("playerShareBtn").addEventListener("click", shareEpisode);
+
 /* ----------------------------------------------------------------------
    8ب) لوحة التحكم — كلمة السر
    لتغيير كلمة السر لاحقًا: عدّل القيمة التالية فقط.
 ------------------------------------------------------------------------- */
 
 const ADMIN_PASSWORD = "123456";
+
+function getAdminPassword() {
+  return localStorage.getItem("masalsali_admin_password") || ADMIN_PASSWORD;
+}
+
+function setAdminPassword(pw) {
+  localStorage.setItem("masalsali_admin_password", pw);
+}
+
+el("changePasswordBtn").addEventListener("click", () => {
+  const input = el("changePasswordInput");
+  const value = input.value.trim();
+  if (value.length < 4) {
+    alert("كلمة السر يجب أن تكون 4 أحرف أو أكثر.");
+    input.focus();
+    return;
+  }
+  setAdminPassword(value);
+  input.value = "";
+  const btn = el("changePasswordBtn");
+  const original = btn.textContent;
+  btn.textContent = "تم الحفظ ✓";
+  setTimeout(() => { btn.textContent = original; }, 1400);
+});
 
 const PLACEHOLDER_IMG = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" width="400" height="600"><rect width="400" height="600" fill="#201726"/><text x="50%" y="50%" font-family="serif" font-size="130" fill="#E3B23C" text-anchor="middle" dominant-baseline="middle">&#1605;</text></svg>`
@@ -969,7 +1096,7 @@ function closePasswordModal() {
 function handlePasswordSubmit() {
   const value = el("passwordInput").value.trim();
 
-  if (value === ADMIN_PASSWORD) {
+  if (value === getAdminPassword()) {
     setAdminLoggedIn(true);
     closePasswordModal();
     enterAdmin();
@@ -1218,6 +1345,7 @@ el("adminSeriesForm").addEventListener("submit", (e) => {
   adminEditingId = seriesObj.id;
   renderAdminSeriesList();
   el("adminDeleteSeriesBtn").hidden = false;
+  buildFilterOptions();
   renderCatalog();
   renderHero();
 
@@ -1239,6 +1367,7 @@ el("adminDeleteSeriesBtn").addEventListener("click", () => {
   el("adminSeriesForm").hidden = true;
   el("adminEmptyHint").hidden = false;
   renderAdminSeriesList();
+  buildFilterOptions();
   renderCatalog();
   renderHero();
 });

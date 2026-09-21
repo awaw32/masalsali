@@ -1351,3 +1351,227 @@ a, input, textarea{ -webkit-tap-highlight-color: transparent; }
     padding-right: max(16px, env(safe-area-inset-right));
   }
 }
+
+/* ==========================================================================
+   الجولة الاحترافية: شاشة تحميل، فلترة وترتيب، مشغّل بأخطاء واضحة، مشاركة،
+   وتغيير كلمة سر اللوحة + ضبط استجابة دقيق لكل الجوالات
+   ========================================================================== */
+
+html{ -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+/* ---------- شاشة تحميل أولية ---------- */
+.app-loader{
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-1);
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  animation: loaderAutoHide 0.5s ease forwards 7s; /* أمان إن تعطّل السكريبت */
+}
+.app-loader[hidden]{ display: none; }
+@keyframes loaderAutoHide{
+  to{ opacity: 0; visibility: hidden; }
+}
+.app-loader-box{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+.app-loader-mark{
+  width: 64px;
+  height: 64px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 32px;
+  color: #1C1106;
+  background: linear-gradient(140deg, var(--gold-hi), var(--gold) 55%, var(--gold-low));
+  box-shadow: 0 0 40px -6px rgba(227,178,60,0.7), inset 0 1px 0 rgba(255,255,255,0.45);
+}
+.app-loader-bar{
+  width: 150px;
+  height: 4px;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--bg-2);
+}
+.app-loader-bar::after{
+  content: "";
+  display: block;
+  width: 46%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  animation: loaderSlide 1s ease-in-out infinite;
+}
+@keyframes loaderSlide{
+  from{ transform: translateX(-120%); }
+  to{ transform: translateX(320%); }
+}
+
+/* ---------- فلترة وترتيب ---------- */
+.filter-select{
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: rgba(33,23,40,0.75);
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path d='M1 1l4 4 4-4' stroke='%23E3B23C' stroke-width='1.6' fill='none' stroke-linecap='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: left 12px center;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 8px 30px 8px 14px;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.filter-select:focus{
+  border-color: rgba(227,178,60,0.7);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(227,178,60,0.13);
+}
+.filter-select option{ background: var(--surface-2); color: var(--text-primary); }
+
+/* ---------- مشغّل الفيديو: حالة تحميل وحالة خطأ ---------- */
+.player-frame-load{
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--text-muted);
+  font-size: 14px;
+  text-align: center;
+  padding: 22px;
+  background: radial-gradient(90% 95% at 50% 0%, #21182B, #08050B 78%);
+}
+.frame-spinner{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 3px solid rgba(227,178,60,0.18);
+  border-top-color: var(--gold);
+  animation: spin 0.85s linear infinite;
+}
+@keyframes spin{ to{ transform: rotate(360deg); } }
+.player-frame-error{
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.8;
+  text-align: center;
+  padding: 22px;
+  background: radial-gradient(90% 95% at 50% 0%, #251B2E, #08050B 78%);
+}
+.frame-error-icon{
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 22px;
+  color: #1C1106;
+  background: linear-gradient(140deg, var(--gold-hi), var(--gold) 55%, var(--gold-low));
+}
+
+/* ---------- مشاركة ---------- */
+.player-nav .btn{ display: inline-flex; align-items: center; gap: 8px; justify-content: center; }
+
+/* ---------- تغيير كلمة سر اللوحة ---------- */
+.admin-password-change{
+  margin-top: 20px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+.admin-password-change > p{
+  color: var(--text-muted);
+  font-size: 13.5px;
+  font-weight: 800;
+  margin: 0 0 10px;
+}
+.admin-password-change .admin-input{
+  letter-spacing: 2px;
+  font-size: 15px;
+  text-align: right;
+  margin-bottom: 10px;
+}
+.admin-password-note{
+  color: var(--text-faint) !important;
+  font-size: 11.5px !important;
+  font-weight: 500 !important;
+  line-height: 1.7;
+  margin-top: 9px !important;
+}
+
+/* ---------- ضبط استجابة شامل لكل الشاشات ---------- */
+.hero{ min-height: 76dvh; }
+
+@media (max-width: 900px){
+  .hero{ min-height: 56dvh; }
+  /* منع تكبير iOS/أندرويد التلقائي عند التركيز على أي حقول */
+  input, textarea, select{ font-size: 16px !important; }
+  .section-head-actions{ gap: 10px; }
+}
+
+@media (max-width: 640px){
+  .header-inner{ gap: 12px; }
+  .admin-btn{ min-width: 44px; min-height: 42px; }
+  .btn{ min-height: 44px; }
+  .btn-sm{ min-height: 38px; }
+  .filter-select{
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 100%;
+    font-size: 13px !important;
+    text-align: right;
+  }
+  .section-head-actions{ width: 100%; }
+  .section-head h2{ flex: 1 1 auto; }
+  .episode-item{ min-height: 58px; }
+  .fullscreen-btn{ min-height: 42px; }
+  .app-loader-mark{ width: 54px; height: 54px; font-size: 27px; }
+}
+
+/* الشاشات الصغيرة جدًا (320-360) */
+@media (max-width: 359px){
+  .poster-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .poster-card-label{ padding: 9px 8px; }
+  .poster-card-title{ font-size: 12.5px; }
+  .catalog{ padding-inline: 14px; }
+  .hero-title{ font-size: 24px; }
+  .hero-eyebrow{ font-size: 10.5px; }
+}
+
+/* الهاتف بأفقية الشاشة (منخفض الارتفاع) */
+@media (max-height: 480px) and (orientation: landscape){
+  .hero{ min-height: 330px; }
+  .series-banner{ height: 46svh; }
+  .player-frame video,
+  .player-frame iframe{ max-height: 70svh; }
+  .app-loader-mark{ width: 48px; height: 48px; font-size: 24px; }
+}
+
+/* أجهزة اللمس: حجم لمس مريح وبدون ظلال معلّقة */
+@media (hover: none), (pointer: coarse){
+  .poster-card{ transform: none; }
+}

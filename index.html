@@ -5,7 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0A0710">
 <meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="description" content="مسلسلي — بوابتك لمشاهدة المسلسلات التركية المترجمة: حلم أشرف، قلب أسود، حب محتمل، بهار، حرب الورود وأكثر، بجودة عالية وبدون إعلانات.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <title>مسلسلي | مسلسلاتك في مكان واحد</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +19,14 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<!-- شاشة تحميل أولية (تختفي تلقائيًا بعد تجهيز البيانات أو بعد مهلة أمان) -->
+<div class="app-loader" id="appLoader" aria-hidden="true">
+  <div class="app-loader-box">
+    <span class="app-loader-mark">م</span>
+    <span class="app-loader-bar"></span>
+  </div>
+</div>
 
 <!-- شريط علوي -->
 <header class="site-header" id="siteHeader">
@@ -79,6 +93,15 @@
         <h2>المكتبة</h2>
         <div class="section-head-actions">
           <p class="section-sub" id="resultsCount"></p>
+          <select class="filter-select" id="genreFilter" aria-label="تصفية حسب النوع">
+            <option value="">كل الأنواع</option>
+          </select>
+          <select class="filter-select" id="sortSelect" aria-label="ترتيب المسلسلات">
+            <option value="featured">ترتيب الواجهة</option>
+            <option value="recent">الأحدث</option>
+            <option value="title">أبجدي</option>
+            <option value="episodes">الأكثر حلقات</option>
+          </select>
           <button type="button" class="btn btn-ghost btn-sm fav-filter-btn" id="favFilterBtn">♥ مفضلتي</button>
         </div>
       </div>
@@ -109,6 +132,10 @@
         <h1 id="seriesTitle"></h1>
         <div class="series-title-row">
           <button type="button" class="btn btn-ghost btn-sm" id="favToggleBtn">♥ أضف إلى مفضلتي</button>
+          <button type="button" class="btn btn-ghost btn-sm" id="seriesShareBtn">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3v11M8 7l4-4 4 4M5 13v7a1 1 0 001 1h12a1 1 0 001-1v-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            مشاركة
+          </button>
         </div>
         <p class="series-meta" id="seriesMeta"></p>
         <p class="series-desc" id="seriesDesc"></p>
@@ -149,6 +176,10 @@
       <div class="player-nav">
         <button type="button" class="btn btn-ghost btn-sm" id="prevEpisodeBtn" hidden>الحلقة السابقة</button>
         <button type="button" class="btn btn-gold btn-sm" id="nextEpisodeBtn" hidden>الحلقة التالية</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="playerShareBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 3v11M8 7l4-4 4 4M5 13v7a1 1 0 001 1h12a1 1 0 001-1v-7" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          مشاركة
+        </button>
       </div>
     </div>
 
@@ -183,6 +214,13 @@
       <aside class="admin-sidebar">
         <button class="btn btn-gold btn-block" id="adminAddSeriesBtn">+ إضافة مسلسل جديد</button>
         <ul class="admin-series-list" id="adminSeriesList"></ul>
+
+        <div class="admin-password-change">
+          <p>تغيير كلمة سر اللوحة</p>
+          <input type="text" id="changePasswordInput" class="admin-input" placeholder="كلمة سر جديدة" maxlength="20" autocomplete="off">
+          <button type="button" class="btn btn-ghost btn-sm btn-block" id="changePasswordBtn">حفظ كلمة السر</button>
+          <p class="admin-password-note">تُحفظ على جهازك الحالي وتبقى سارية بعد تحديث الموقع.</p>
+        </div>
       </aside>
 
       <!-- نموذج التحرير -->

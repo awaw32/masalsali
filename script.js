@@ -1023,6 +1023,43 @@ function renderHero() {
    7) عرض صفحة تفاصيل المسلسل
 ------------------------------------------------------------------------- */
 
+/* ============ إعدادات الإعلانات (Adstera) ============
+   لتفعيل الإعلانات:
+   1) افتح index.html — داخل كل قفص `<div class="ad-slot" ...>` الصق كود Adstera
+      مكان تسمية "إعلان" (تظهر فوق التذييل وفي صفحة المشغّل).
+   2) لتفعيل الكتل الـ Native داخل قائمة الحلقات اجعل native = true أدناه. */
+const AD_SETTINGS = {
+  player: false,
+  footer: false,
+  native: false,
+  nativeEvery: 6,
+  nativeMax: 3,
+};
+
+function makeAdSlot(zone) {
+  const box = document.createElement("div");
+  box.className = `ad-slot ad-slot-${zone}`;
+  box.dataset.adZone = zone;
+  box.innerHTML = '<span class="ad-slot-label">إعلان</span>';
+  return box;
+}
+
+function injectNativeAdSlots(listEl) {
+  if (!AD_SETTINGS.native) return;
+  if (!listEl || listEl.querySelector(".ad-native-shell")) return;
+  const items = listEl.querySelectorAll("li");
+  const step = Math.max(4, AD_SETTINGS.nativeEvery);
+  const limit = Math.max(1, AD_SETTINGS.nativeMax);
+  let inserted = 0;
+  for (let after = step; after < items.length && inserted < limit; after += step) {
+    const shell = document.createElement("li");
+    shell.className = "ad-native-shell";
+    shell.appendChild(makeAdSlot("native"));
+    listEl.insertBefore(shell, items[after]);
+    inserted++;
+  }
+}
+
 function renderEpisodeList(container, series, activeIndex = -1) {
   container.innerHTML = "";
   series.episodes.forEach((ep, index) => {
@@ -1047,6 +1084,7 @@ function renderEpisodeList(container, series, activeIndex = -1) {
     container.appendChild(li);
     revealObserver.observe(li);
   });
+  injectNativeAdSlots(container);
 }
 
 function renderSeriesView(series) {

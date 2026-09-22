@@ -1672,3 +1672,49 @@ html{ -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
   .player-frame iframe{ max-height: 72svh; }
   .player-info{ margin-top: 10px; }
 }
+
+/* ==========================================================================
+   أقفاص الإعلانات (Adstera) — مواقع جاهزة فارغة، متجاوبة وغير ملصقة
+   ========================================================================== */
+.ad-slot{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  min-height: 90px;
+  margin: 26px auto;
+  padding: 12px;
+  border: 1px dashed rgba(227,178,60,0.35);
+  border-radius: 14px;
+  background: rgba(227,178,60,0.05);
+  color: var(--text-faint);
+  overflow: hidden;
+}
+.ad-slot-label{
+  font-size: 11px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  user-select: none;
+}
+.ad-slot iframe,
+.ad-slot img,
+.ad-slot a{ max-width: 100%; }
+.ad-slot-player{ max-width: 728px; margin-top: 24px; }
+.ad-slot-footer{ max-width: 970px; }
+
+/* كتلة Native داخل قائمة الحلقات */
+.ad-native-shell{
+  list-style: none;
+  margin: 8px 0;
+}
+.ad-native-shell .ad-slot{
+  margin: 0;
+  min-height: 250px;
+}
+@media (max-width: 640px){
+  .ad-slot{ margin: 18px auto; padding: 8px; min-height: 70px; }
+  .ad-native-shell .ad-slot{ min-height: 200px; }
+}
